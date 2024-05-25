@@ -1,12 +1,24 @@
-import express from 'express';
+//*  Este archivo se encarga de crear el servidor, configurarlo y de iniciarlo.
+
+import express, { Router } from 'express';
+
+// Contrato para la creación del servidor
+interface OptionsConstructor {
+    port: number;
+    routes: Router;
+}
 
 export class Server {
-    public readonly app = express();
     private serverListener?: any;
-    private readonly port: number;
+    private readonly port:   number;
+    private readonly routes: Router;
 
-    constructor(port: number) {
-        this.port = port;
+    public  readonly app = express();
+
+    constructor( optionsConstructor: OptionsConstructor ) {
+        const { port, routes } = optionsConstructor;
+        this.port   = port;
+        this.routes = routes;
     }
 
     async start(){
@@ -14,6 +26,8 @@ export class Server {
         //* Middlewares
         this.app.use(express.json());
 
+        //* Routes
+        this.app.use(this.routes);
 
         this.serverListener = this.app.listen(this.port, () => {
             console.log("=====================================")
