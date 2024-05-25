@@ -8,6 +8,9 @@ import type {Config} from 'jest';
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
 
   // Stop running tests after `n` failures
   // bail: 0,
