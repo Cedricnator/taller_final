@@ -1,4 +1,5 @@
-//* Este archivo se encarga de separar la responsabilidad del router y del controlador
+//* Separa la responsabilidad del router y del controlador
+
 import { Request, Response } from 'express';
 
 export class Controller {

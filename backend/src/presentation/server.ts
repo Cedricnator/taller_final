@@ -29,10 +29,12 @@ export class Server {
         //* Routes
         this.app.use(this.routes);
 
+        //* Puerto en que escucha el servidor
         this.serverListener = this.app.listen(this.port, () => {
             console.log("=====================================")
             console.log(`Server listening on port ${this.port}`);
         })
+        
     }
 
     public close(){
