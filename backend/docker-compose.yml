@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db.backend.local:
+    container_name: db.backend.local
+    build:
+      context: .
+      dockerfile: build/Dockerfile.db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - 45432:5432
+
+
+networks:
+  backend_network:
+    external: true

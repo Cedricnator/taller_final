@@ -1,4 +1,8 @@
+#Enviroments
 .env
+.env.prod
+.env.test
+
 /mongo
 /postgres
 node_modules/
