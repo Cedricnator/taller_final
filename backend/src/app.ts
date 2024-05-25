@@ -1,4 +1,5 @@
-import { Server }from './presentation';
+import { envs } from './adapters/envs';
+import { AppRoutes, Server }from './presentation';
 
 // Funcion anonima autoinvocada, debe esperar a que se ejecute el main
 (async () => {
@@ -6,6 +7,9 @@ import { Server }from './presentation';
 })();
 
 async function main() {
-    const server = new Server(3000)
+    const server = new Server({
+        port:   envs.PORT,
+        routes: AppRoutes.routes
+    })
     server.start();
 }
