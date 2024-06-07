@@ -10,13 +10,11 @@ function App() {
   }
 
   return (
-    <div className='dark mx mx-auto bg-background h-screen text-primary'>
-      <div className=''>
+    <div className='dark mx-12  bg-background h-screen text-primary'>
         <div className='py-4 px-2'>{count}</div>
         <div>
           <Button onClick={handleCount}>Click me</Button>
         </div>
-      </div>
     </div>
   )
 }
