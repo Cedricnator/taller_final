@@ -20,7 +20,7 @@ export class RegisterUserDto {
          return ['Missing password'];
       }
       if( password.length < 6 ){
-         return ['Missing password'];
+         return ['The password must be at least 6 characters long'];
       }
       return [undefined, new RegisterUserDto(name, email, password)];
    }
