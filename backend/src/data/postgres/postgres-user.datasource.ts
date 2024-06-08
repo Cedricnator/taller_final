@@ -1,12 +1,3 @@
-import { UserDataSource } from "../../domain/datasource";
-import { UserEntity } from "../../domain/entities";
+import { PrismaClient } from "@prisma/client";
 
-
-
-export class PostgresUserDataSource implements UserDataSource {
-   saveUser(user: UserEntity): Promise<void> {
-      throw new Error("Method not implemented.");
-   }
-
-
-}
+export const prisma = new PrismaClient();

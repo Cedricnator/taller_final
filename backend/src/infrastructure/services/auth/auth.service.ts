@@ -1,4 +1,4 @@
-import { CustomError, RegisterUserDto, UserEntity, LoginUserDto } from "../../../domain";
+import { CustomError, RegisterUserDto, UserEntity, LoginUserDto, UserRepository } from "../../../domain";
 import { BcryptAdapter, JwtAdapter } from '../../../adapters';
 import { EmailService }              from "./email.service";
 import { PrismaClient }              from "@prisma/client";
@@ -11,7 +11,8 @@ export class AuthService {
    constructor(
       public readonly emailService: EmailService,
       public readonly webServiceUrl: string,
-      public readonly jwtAdapter: JwtAdapter
+      public readonly jwtAdapter: JwtAdapter,
+      private readonly userRepository: UserRepository
    ) {
       this.WEB_SERVICE_URL = webServiceUrl;
    }
@@ -49,14 +50,13 @@ export class AuthService {
 
       try {
          const hashedPassword = this.bcrypt.hash(registerUserDto.password);
+         registerUserDto = {
+            name: registerUserDto.name,
+            email: registerUserDto.email,
+            password: hashedPassword
+         }
 
-         const user = await this.prisma.user.create({
-            data: {
-               name: registerUserDto.name,
-               email: registerUserDto.email,
-               password: hashedPassword
-            }
-         });
+         const user = await this.userRepository.saveUser(registerUserDto)
 
          // Email de confirmación
          await this.sendEmailValidationLink(user.email);
@@ -73,11 +73,7 @@ export class AuthService {
    }
 
    public async loginUser(loginUserDto: LoginUserDto) {
-      const user = await this.prisma.user.findFirst({
-         where: {
-            email: loginUserDto.email
-         }
-      })
+      const user = await this.userRepository.findByEmail(loginUserDto.email);
       if (!user) throw CustomError.badRequest(`User with ${loginUserDto.email} not found`);
       try {
          const isValidPassword = this.bcrypt.compare(loginUserDto.password, user.password);
@@ -94,8 +90,27 @@ export class AuthService {
 
    public async validateEmail(token: string) {
       const payload = await this.jwtAdapter.validateToken(token);
+      
       if (!payload) throw CustomError.badRequest('Invalid token');
       
-    
+      const { email } = payload as { email: string };
+      
+      if( !email ) throw CustomError.internalServer('Email not in token!!!!');
+      
+      const user = await this.userRepository.findByEmail(email); 
+      
+      if(!user) throw CustomError.internalServer('¡¡¡Email not exists in database!!!');
+      
+      await this.prisma.user.update({
+         where: {
+            id: user.id
+         },
+         data: {
+            emailValdiated: true
+         }
+      
+      })
+
+      return true;
    }
 }

@@ -3,18 +3,27 @@
 import { Router }                     from 'express';
 import { AuthController }             from './controller.auth';
 import { envs, JwtAdapter }           from '../../adapters';
-import { AuthService, EmailService }  from '../../infrastructure';
+import { AuthService, EmailService, UserDataSourceImpl, UserRepositoryImpl }  from '../../infrastructure';
 
 export class AuthRoutes {
    static get routes(): Router {
       const router         = Router();
-      const jwtAdapter     = new JwtAdapter(envs.JWT_SEED)
+      const dataSource     = new UserDataSourceImpl();
+      const userRepository = new UserRepositoryImpl(dataSource);
+      const jwtAdapter     = new JwtAdapter(envs.JWT_SEED);
+      
       const emailService   = new EmailService({
          emailService:        envs.MAILER_SERVICE, 
          mailerEmail:         envs.MAILER_EMAIL, 
          senderEmailPassword: envs.MAILER_SECRET_KEY
       });
-      const authService    = new AuthService(emailService, envs.WEBSERVICE_URL, jwtAdapter);
+
+      const authService    = new AuthService(
+         emailService, 
+         envs.WEBSERVICE_URL, 
+         jwtAdapter,
+         userRepository
+      );
       const authController = new AuthController(authService);
 
       //* Rutas
