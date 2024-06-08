@@ -1,0 +1,12 @@
+#Enviroments
+.env
+.env.prod
+.env.test
+
+/mongo
+/postgres
+node_modules/
+dist/
+coverage/
+
+prisma/migrations
