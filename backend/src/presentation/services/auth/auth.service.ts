@@ -3,14 +3,13 @@ import { CustomError, RegisterUserDto } from "../../../domain";
 import { UserEntity } from "../../../domain/entities";
 import { BcryptAdapter } from '../../../adapters/bcryp.adapter';
 import { LoginUserDto } from '../../../domain/dto/auth/login-user.dto';
+import { JwtAdapter } from "../../../adapters";
 
 export class AuthService {
    private prisma = new PrismaClient();
    private bcrypt = new BcryptAdapter();
 
-   constructor(){
-
-   }
+   constructor(){}
 
    public async registerUser( registerUserDto: RegisterUserDto ) {
       
@@ -44,7 +43,7 @@ export class AuthService {
       }
    }
 
-   public async loginUser( loginUserDto: LoginUserDto): Promise<{token: string}>{
+   public async loginUser( loginUserDto: LoginUserDto){
       const user = await this.prisma.user.findFirst({
          where: {
             email: loginUserDto.email
@@ -54,9 +53,10 @@ export class AuthService {
       try {
          const isValidPassword = this.bcrypt.compare(loginUserDto.password, user.password );
          if( !isValidPassword ) throw CustomError.badRequest('Invalid password');
-
+         const token = await JwtAdapter.generateToken({ id: user.id, name: user.name });
+         if(!token) throw CustomError.internalServer("Error while creating JWT");
          return {
-            token: "ABC"
+            token: token
          }
       } catch (error) {
          throw CustomError.internalServer(`Error: ${ error }`);
