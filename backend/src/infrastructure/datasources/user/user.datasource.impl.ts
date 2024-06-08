@@ -9,16 +9,16 @@ export class UserDataSourceImpl implements UserDataSource {
       return UserEntity.fromObject(createUser);
    }
 
-   async getAll(): Promise<UserEntity[]> { 
+   async getAll(): Promise<UserEntity[]> {
       const users = await prisma.user.findMany();
-      return users.map( user => UserEntity.fromObject(user));
+      return users.map(user => UserEntity.fromObject(user));
    }
 
    async findById(id: number): Promise<UserEntity> {
       const user = await prisma.user.findFirst({
-         where: {id}
-      }) 
-      if(!user) throw `User with id: ${id} not found`
+         where: { id }
+      })
+      if (!user) throw `User with id: ${id} not found`
       return UserEntity.fromObject(user);
    }
 
@@ -28,6 +28,16 @@ export class UserDataSourceImpl implements UserDataSource {
             email
          }
       })
-      return UserEntity.fromObject(user!);      
+      return UserEntity.fromObject(user!);
+   }
+
+   async isUserFoundByEmail(email: string): Promise<boolean> {
+      const user = await prisma.user.findFirst({
+         where: {
+            email
+         }
+      })
+      if( !user ) return false;
+      return true;
    }
 }

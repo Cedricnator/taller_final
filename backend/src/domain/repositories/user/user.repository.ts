@@ -6,5 +6,5 @@ export abstract class UserRepository {
    abstract getAll(): Promise<UserEntity[]>;
    abstract findById(id: Number): Promise<UserEntity>
    abstract findByEmail(email: string):                   Promise<UserEntity>
-
+   abstract isUserFoundByEmail(email: string):            Promise<boolean>
 }

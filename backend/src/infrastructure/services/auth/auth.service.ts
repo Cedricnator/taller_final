@@ -40,12 +40,8 @@ export class AuthService {
    }
 
    public async registerUser(registerUserDto: RegisterUserDto) {
-      const existsUser = await this.prisma.user.findFirst({
-         where: {
-            email: registerUserDto.email
-         }
-      })
-
+      const existsUser = await this.userRepository.isUserFoundByEmail(registerUserDto.email);
+      
       if (existsUser) throw CustomError.badRequest('User already exists');
 
       try {

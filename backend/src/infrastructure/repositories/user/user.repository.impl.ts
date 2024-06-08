@@ -3,8 +3,8 @@ import { RegisterUserDto, UserDataSource, UserEntity, UserRepository } from "../
 export class UserRepositoryImpl implements UserRepository {
    constructor(
       private readonly datasource: UserDataSource
-   ) { }
-   
+   ) {}
+
    async saveUser(registerUserDto: RegisterUserDto): Promise<UserEntity> {
       return await this.datasource.saveUser(registerUserDto);
    }
@@ -19,5 +19,9 @@ export class UserRepositoryImpl implements UserRepository {
 
    async findByEmail(email: string): Promise<UserEntity> {
       return await this.datasource.findByEmail(email);
+   }
+
+   async isUserFoundByEmail(email: string): Promise<boolean> {
+      return await this.datasource.isUserFoundByEmail(email);
    }
 }

@@ -6,4 +6,5 @@ export abstract class UserDataSource {
    abstract getAll():                                     Promise<UserEntity[]>;
    abstract findById(id: number):                         Promise<UserEntity>
    abstract findByEmail(email: string):                   Promise<UserEntity>
+   abstract isUserFoundByEmail(email: string):            Promise<boolean>
 }
