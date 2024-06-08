@@ -14,15 +14,49 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id        Int          @id @default(autoincrement())
   email     String       @unique
   emailValdiated Boolean @default(false)
-  role      String       @default("USER")
+  role      Role         @default(USER)
   name      String
   password  String
   img       String?
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
+  Category  Category[]
+  Product   Product[]
 }
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  available Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  Product   Product[]
+} 
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String
+  price       Float    @default(0)
+  img         String? 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  categoryId  Int
+  userId      Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  User        User     @relation(fields: [userId], references: [id])
+}
+
+
 
