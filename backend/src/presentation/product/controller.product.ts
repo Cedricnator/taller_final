@@ -3,15 +3,24 @@
 import { Request, Response } from 'express';
 
 export class ControllerProduct {
-    
-    // DI
-    constructor(){}
+   
+   // DI
+   constructor(){}
 
-    // Controladores
-    public getAll = async(req: Request, res: Response) => {}
-    public getOneById = async(req: Request, res: Response) => {}
-    public createOne = async(req: Request, res: Response) => {}
-    public updateOne = async(req: Request, res: Response) => {}
-    public deleteOne = async(req: Request, res: Response) => {}
-
+   // Controladores
+   public getAll = async(req: Request, res: Response) => {
+      res.json({message: 'getAll'});
+   }
+   public getOneById = async(req: Request, res: Response) => {
+      res.json({message: 'getOneById'})
+   }
+   public createOne = async(req: Request, res: Response) => {
+      res.json({message: 'createOne'})
+   }
+   public updateOne = async(req: Request, res: Response) => {
+      res.json({message: 'updateOne'})
+   }
+   public deleteOne = async(req: Request, res: Response) => {
+      res.json({message: 'deleteOne'})
+   }
 }

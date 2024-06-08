@@ -9,7 +9,7 @@ export class RoutesCategory {
 
         router.get(   '/'    , controller.getAll     );
         router.get(   '/:id' , controller.getOneById );
-        router.post(  '/'    , controller.createOne  );
+        router.post(  '/create'    , controller.createOne  );
         router.put(   '/:id' , controller.updateOne  );
         router.delete('/:id' , controller.deleteOne  );
 
