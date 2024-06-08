@@ -4,6 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+//* Execture this command to migrate database:  pnpm dlx prisma migrate dev --name init
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,3 +13,13 @@ datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_URL")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

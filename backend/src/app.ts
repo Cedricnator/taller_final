@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import { envs } from './adapters/envs';
 import { AppRoutes, Server }from './presentation';
 
@@ -11,5 +12,8 @@ async function main() {
         port:   envs.PORT,
         routes: AppRoutes.routes
     })
+
+    const prisma = new PrismaClient();
+    
     server.start();
 }
