@@ -2,9 +2,12 @@ node_modules
 npm-debug.log
 Dockerfile*
 docker-compose*
-.dockerignore
+dockerignore
+.env.template
 .git
 .gitignore
 README.md
 LICENSE
 .vscode
+setupTests.ts
+jest*ts
