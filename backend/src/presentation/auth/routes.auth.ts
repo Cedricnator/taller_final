@@ -1,10 +1,14 @@
 //* Enrutador global, todas las rutas estan aqui
 
-import { Router }                     from 'express';
-import { AuthController }             from './controller.auth';
-import { envs, JwtAdapter }           from '../../adapters';
-import { AuthService, EmailService, UserDataSourceImpl, UserRepositoryImpl }  from '../../infrastructure';
-import { BcryptAdapter } from '../../adapters/bcryp.adapter';
+import { Router }                          from 'express';
+import { AuthController }                  from './controller.auth';
+import { envs, JwtAdapter, BcryptAdapter } from '../../adapters';
+import { 
+   AuthService, 
+   EmailService, 
+   UserDataSourceImpl, 
+   UserRepositoryImpl, 
+}  from '../../infrastructure';
 
 export class AuthRoutes {
    static get routes(): Router {
@@ -27,12 +31,13 @@ export class AuthRoutes {
          bcryptAdapter,
          envs.WEBSERVICE_URL, 
       );
+
       const authController = new AuthController(authService);
 
       //* Rutas
-      router.post('/login', authController.login);
-      router.post('/register', authController.register);
-      router.get('/validate-email/:token', authController.validateEmail);
+      router.get(  '/validate-email/:token', authController.validateEmail );
+      router.post( '/login'                , authController.login         );
+      router.post( '/register'             , authController.register      );
       return router;
    }
 }

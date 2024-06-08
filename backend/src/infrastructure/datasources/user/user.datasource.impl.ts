@@ -1,5 +1,9 @@
 import { prisma } from "../../../data";
-import { RegisterUserDto, UserDataSource, UserEntity } from "../../../domain";
+import { 
+   RegisterUserDto, 
+   UserDataSource, 
+   UserEntity 
+} from "../../../domain";
 
 export class UserDataSourceImpl implements UserDataSource {
    async saveUser(registerUserDto: RegisterUserDto): Promise<UserEntity> {

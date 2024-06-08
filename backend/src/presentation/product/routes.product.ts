@@ -1,11 +1,11 @@
 //* Se encarga de manejar las rutas de la entidad
-import { Controller }      from './controller';
-import { Router }          from "express";
+import { Router }            from "express";
+import { ControllerProduct } from "./controller.product";
 
-export class Routes {
+export class RoutesProduct {
     static get routes(): Router {
         const router     =  Router();
-        const controller = new Controller();
+        const controller = new ControllerProduct();
 
         router.get(   '/'    , controller.getAll     );
         router.get(   '/:id' , controller.getOneById );

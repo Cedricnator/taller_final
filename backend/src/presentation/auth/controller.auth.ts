@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import { Request, Response }             from 'express'
 import { RegisterUserDto, LoginUserDto } from '../../domain';
-import { AuthService } from '../../infrastructure';
-import { handleError } from '../error/handleError.error';
+import { AuthService }                   from '../../infrastructure';
+import { handleError }                   from '../error';
 
 export class AuthController {
    constructor(

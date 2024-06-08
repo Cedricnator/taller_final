@@ -1,1 +1,1 @@
-export * from './postgres/postgres-user.datasource';
+export * from './postgres/postgres.datasource';

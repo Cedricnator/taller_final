@@ -2,7 +2,7 @@
 
 import { Request, Response } from 'express';
 
-export class Controller {
+export class ControllerCategory {
     
     // DI
     constructor(){}
