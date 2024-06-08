@@ -1,4 +1,4 @@
-import { envs } from './adapters/envs';
+import { envs } from './adapters/envs.adapter';
 import { AppRoutes, Server }from './presentation';
 
 // Funcion anonima autoinvocada, debe esperar a que se ejecute el main
