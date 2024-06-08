@@ -37,7 +37,19 @@ export class UserDataSourceImpl implements UserDataSource {
             email
          }
       })
-      if( !user ) return false;
+      if (!user) return false;
       return true;
+   }
+   
+   async validateUserEmail(user: UserEntity): Promise<UserEntity> {
+      const userUpdated = await prisma.user.update({
+         where: {
+            id: user.id
+         },
+         data: {
+            emailValdiated: true
+         }
+      })
+      return UserEntity.fromObject(userUpdated);
    }
 }

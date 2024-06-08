@@ -1,27 +1,21 @@
 import { CustomError, RegisterUserDto, UserEntity, LoginUserDto, UserRepository } from "../../../domain";
 import { BcryptAdapter, JwtAdapter } from '../../../adapters';
 import { EmailService }              from "./email.service";
-import { PrismaClient }              from "@prisma/client";
 
 export class AuthService {
-   private prisma = new PrismaClient();
-   private bcrypt = new BcryptAdapter();
-   private WEB_SERVICE_URL: string;
-
    constructor(
-      public readonly emailService: EmailService,
-      public readonly webServiceUrl: string,
-      public readonly jwtAdapter: JwtAdapter,
-      private readonly userRepository: UserRepository
-   ) {
-      this.WEB_SERVICE_URL = webServiceUrl;
-   }
+      private readonly userRepository:  UserRepository,
+      public  readonly emailService:    EmailService,
+      public  readonly jwtAdapter:      JwtAdapter,
+      private readonly bcrypt:          BcryptAdapter, 
+      private readonly WEB_SERVICE_URL: string
+   ) {}
 
    private sendEmailValidationLink = async (email: string) => {
       const token = await this.jwtAdapter.generateToken({ email });
       if (!token) throw CustomError.internalServer('Error while creating token');
       const link = `http://${this.WEB_SERVICE_URL}/auth/validate-email/${token}`;
-      console.log(link);
+      // console.log(link);
       const html = `
             <h1>Validate your email</h1>
             <p>Click on the following link to validate your email</p>
@@ -85,28 +79,13 @@ export class AuthService {
    }
 
    public async validateEmail(token: string) {
-      const payload = await this.jwtAdapter.validateToken(token);
-      
-      if (!payload) throw CustomError.badRequest('Invalid token');
-      
+      const payload   = await this.jwtAdapter.validateToken(token);
+      if (!payload)     throw CustomError.badRequest('Invalid token');
       const { email } = payload as { email: string };
-      
-      if( !email ) throw CustomError.internalServer('Email not in token!!!!');
-      
-      const user = await this.userRepository.findByEmail(email); 
-      
-      if(!user) throw CustomError.internalServer('¡¡¡Email not exists in database!!!');
-      
-      await this.prisma.user.update({
-         where: {
-            id: user.id
-         },
-         data: {
-            emailValdiated: true
-         }
-      
-      })
-
+      if( !email )      throw CustomError.internalServer('Email not in token!!!!');
+      const user      = await this.userRepository.findByEmail(email); 
+      if(!user)         throw CustomError.internalServer('¡¡¡Email not exists in database!!!');
+                        await this.userRepository.validateUserEmail(user);
       return true;
    }
 }
