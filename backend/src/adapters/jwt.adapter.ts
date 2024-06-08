@@ -1,25 +1,30 @@
 import jwt from 'jsonwebtoken'
-import { envs } from './envs.adapter';
 
-const JWT_SEED = envs.JWT_SEED;
 
 export class JwtAdapter {
+   private JWT_SEED: string;
 
-   //TODO: Declarar el JWT_SEED en el constructor para no crear una dependencia oculta
+   constructor(
+      JWT_SEED: string
+   ){
+      this.JWT_SEED = JWT_SEED;
+   }
 
-   static async generateToken(payload: any, duration: string = '2h'){
+   public async generateToken(payload: any, duration: string = '2h'){
       return new Promise((resolve) => {
-         jwt.sign( payload, "SEED", { expiresIn: duration }, (err, token) => {
+         jwt.sign( payload, `${this.JWT_SEED}`, { expiresIn: duration }, (err, token) => {
             if (err) return resolve(null);
             resolve(token);
          })
       })           
    }
 
-   static validateToken(token: string): boolean{
-      throw new Error('Not implemented yet');
+   public async validateToken(token: string) {
+      return new Promise((resolve) => {
+         jwt.verify(token,`${this.JWT_SEED}`, (err, decoded) => {
+            if (err) return resolve(null);
+            resolve(decoded);
+         })
+      })
    }
-
-
-
 }

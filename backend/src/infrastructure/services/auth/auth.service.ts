@@ -10,15 +10,17 @@ export class AuthService {
 
    constructor(
       public readonly emailService: EmailService,
-      public readonly webServiceUrl: string
+      public readonly webServiceUrl: string,
+      public readonly jwtAdapter: JwtAdapter
    ) {
       this.WEB_SERVICE_URL = webServiceUrl;
    }
 
    private sendEmailValidationLink = async (email: string) => {
-      const token = await JwtAdapter.generateToken({ email });
+      const token = await this.jwtAdapter.generateToken({ email });
       if (!token) throw CustomError.internalServer('Error while creating token');
-      const link = `${this.WEB_SERVICE_URL}/auth/validate-email/${token}`;
+      const link = `http://${this.WEB_SERVICE_URL}/auth/validate-email/${token}`;
+      console.log(link);
       const html = `
             <h1>Validate your email</h1>
             <p>Click on the following link to validate your email</p>
@@ -80,7 +82,7 @@ export class AuthService {
       try {
          const isValidPassword = this.bcrypt.compare(loginUserDto.password, user.password);
          if (!isValidPassword) throw CustomError.badRequest('Invalid password');
-         const token = await JwtAdapter.generateToken({ id: user.id, name: user.name });
+         const token = await this.jwtAdapter.generateToken({ id: user.id, name: user.name });
          if (!token) throw CustomError.internalServer("Error while creating JWT");
          return {
             token: token
@@ -88,5 +90,12 @@ export class AuthService {
       } catch (error) {
          throw CustomError.internalServer(`Error: ${error}`);
       }
+   }
+
+   public async validateEmail(token: string) {
+      const payload = await this.jwtAdapter.validateToken(token);
+      if (!payload) throw CustomError.badRequest('Invalid token');
+      
+    
    }
 }
