@@ -1,13 +1,19 @@
 //* Enrutador global, todas las rutas estan aqui
 
-import { Router } from 'express';
+import { Router }         from 'express';
 import { AuthController } from './controller.auth';
-import { AuthService } from '../services/auth/auth.service';
+import { envs }           from '../../adapters';
+import { AuthService, EmailService } from '../../infrastructure';
 
 export class AuthRoutes {
    static get routes(): Router {
       const router         = Router();
-      const authService    = new AuthService();
+      const emailService   = new EmailService({
+         emailService:        envs.MAILER_SERVICE, 
+         mailerEmail:         envs.MAILER_EMAIL, 
+         senderEmailPassword: envs.MAILER_SECRET_KEY
+      });
+      const authService    = new AuthService(emailService, envs.WEBSERVICE_URL);
       const authController = new AuthController(authService);
 
       //* Rutas
