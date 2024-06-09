@@ -1,4 +1,6 @@
-//* Separa la responsabilidad del router y del controlador
+/*
+    * Separa la responsabilidad del router y del controlador.
+*/ 
 
 import { Request, Response } from 'express';
 import { CreateCategoryDto } from '../../domain';
@@ -14,10 +16,10 @@ export class ControllerCategory {
     ){}
 
     // Controladores
-    public createOne = async (req: Request, res: Response) => {
+    public createOne =  (req: Request, res: Response) => {
         const [error, createCategoryDto ] = CreateCategoryDto.create(req.body);
         if(error) return res.status(400).json({ message: error });
-        await this.categoryService
+        this.categoryService
             .createOneCategory(createCategoryDto!, req.body.user )
             .then( (category) => res.json(category) )
             .catch( (error) => handleError(error, res) );

@@ -13,6 +13,9 @@ export class CreateCategoryDto {
       if( !name){
          return ['Missing name'];
       }
+      if( typeof name !== 'string'){
+         return ['Name must be a string'];
+      }
       if( typeof available !== 'boolean'){
          availableBoolean = ( available === 'true')
       }

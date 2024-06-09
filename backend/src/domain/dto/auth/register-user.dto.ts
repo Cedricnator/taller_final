@@ -11,10 +11,13 @@ export class RegisterUserDto {
       const { name, email, password } = object;
 
       if( !name ){
-         return ['Missing name', undefined];
+         return ['Missing name'];
+      }
+      if( typeof name !== 'string' ){
+         return ['Name must be a string'];
       }
       if( !regularExps.email.test(email)){
-         return ['Missing email'];
+         return ['Invalid email format'];
       }
       if( !password ){
          return ['Missing password'];
