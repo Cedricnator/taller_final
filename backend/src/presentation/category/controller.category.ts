@@ -13,28 +13,28 @@ export class ControllerCategory {
     ){}
 
     // Controladores
-    public createOne = async(req: Request, res: Response) => {
+    public createOne = async (req: Request, res: Response) => {
         const [error, createCategoryDto ] = CreateCategoryDto.create(req.body);
         if(error) return res.status(400).json({ message: error });
-        this.categoryService
-            .createOneCategory(createCategoryDto!)
+        await this.categoryService
+            .createOneCategory(createCategoryDto!, req.body.user )
             .then( (category) => res.json(category) )
             .catch( (error) => handleError(error, res) );
     }
 
-    public getAll = async(req: Request, res: Response) => {
+    public getAll = (req: Request, res: Response) => {
         res.json({message: 'getAll'});
     }
 
-    public getOneById = async(req: Request, res: Response) => {
+    public getOneById = (req: Request, res: Response) => {
         res.json({message: 'getOneById'});
     }
 
-    public updateOne = async(req: Request, res: Response) => {
+    public updateOne = (req: Request, res: Response) => {
         res.json({message: 'updateOne'});
     }
 
-    public deleteOne = async(req: Request, res: Response) => {
+    public deleteOne = (req: Request, res: Response) => {
         res.json({message: 'deleteOne'});
     }
 

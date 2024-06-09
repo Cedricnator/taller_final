@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtAdapter, envs } from '../../adapters';
+import { prisma } from '../../data';
+import { UserEntity } from '../../domain';
 
+// TODO: DESACOPLAR PRISMA DE ESTE MIDDLEWARE
 
 export class AuthMiddleware {
    private readonly jwtAdapter:  JwtAdapter;
@@ -20,9 +23,17 @@ export class AuthMiddleware {
       if(!token) res.status(401).json({ error: 'No token provided' });
 
       try {
-         const payload = await this.jwtAdapter.validateToken(token);
+         const payload = await this.jwtAdapter.validateToken<{ id: number }>(token);
          if( !payload ) return res.status(401).json({ error: 'Invalid Token' });
-         req.body.auth = payload;
+         const user = await prisma.user.findUnique({
+            where: {
+               id: payload.id
+            }
+         })
+
+         if( !user ) return res.status(401).json({ error: 'Invalid Token, the user is not found by the token' });
+
+         req.body.user = UserEntity.fromObject(user);
          next();
       } catch (error) {
          // TODO: Implementar un logger, como winston o implementar un microservicio para ello.
