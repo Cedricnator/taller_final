@@ -1,3 +1,10 @@
+/*
+   * Gracias al middleware, podemos interceptar las peticiones y validar si el usuario está autenticado o no.
+   * Ademas de esto, podemos inyectar el usuario en la petición para que los controladores puedan acceder a él.
+   * De este modo, nuestras entidades que estan vinculadas con el usuario, pueden ser creadas, actualizadas o eliminadas
+   * Solo es necesario, llamar este middleware en las rutas que necesiten autenticación.
+*/
+
 import { NextFunction, Request, Response } from 'express';
 import { JwtAdapter, envs } from '../../adapters';
 import { prisma } from '../../data';

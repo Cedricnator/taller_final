@@ -1,6 +1,6 @@
 // import { prisma } from '../../../data';
 import { PrismaClient } from '@prisma/client';
-import { CustomError, CreateCategoryDto, UserEntity } from '../../../domain';
+import { CustomError, CreateCategoryDto, UserEntity, CategoryEntity } from '../../../domain';
 
 
 export class CategoryService{
@@ -33,6 +33,20 @@ export class CategoryService{
          }
       } catch (error) {
          CustomError.internalServer(`Error: ${error}`);
+      }
+   }
+
+   public getCategories = async()  => {
+      const categories = await this.prisma.category.findMany();
+      const categoriesArray = [];
+
+      for (const CategoryEntit of categories) {
+         const { updatedAt, createdAt, ...categoryEntity } = CategoryEntity.fromObject(CategoryEntit);
+         categoriesArray.push(categoryEntity)
+      }
+
+      return {
+         categories: categoriesArray
       }
    }
 

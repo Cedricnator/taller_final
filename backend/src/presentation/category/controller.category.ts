@@ -23,7 +23,9 @@ export class ControllerCategory {
     }
 
     public getAll = (req: Request, res: Response) => {
-        res.json({message: 'getAll'});
+        this.categoryService.getCategories()
+            .then( (categories) => res.json(categories) )
+            .catch( (error) => handleError(error, res) );
     }
 
     public getOneById = (req: Request, res: Response) => {
