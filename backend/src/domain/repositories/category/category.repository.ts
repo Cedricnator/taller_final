@@ -1,4 +1,4 @@
-export abstract class CategoryDatasource {
+export abstract class CategoryRepository {
    
    abstract createOneCategory():  Promise<any>;
 

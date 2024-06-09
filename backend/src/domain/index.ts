@@ -6,3 +6,5 @@ export * from './repositories/user/user.repository';
 export * from './datasource/user/userDataSource.datasource'
 export * from './dto/category/create-category.dto';
 export * from './dto/category/update-category.dto';
+export * from './datasource/category/categoryDatasource.datasource';
+export * from './repositories/category/category.repository';
