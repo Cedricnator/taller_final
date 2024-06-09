@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { CreateCategoryDto } from '../../domain';
 import { CategoryService } from '../../infrastructure';
 import { handleError } from '../error';
+import { PaginationDto } from '../../domain/dto/shared/pagination.dto';
 
 export class ControllerCategory {
     
@@ -23,7 +24,13 @@ export class ControllerCategory {
     }
 
     public getAll = (req: Request, res: Response) => {
-        this.categoryService.getCategories()
+        // Para obtener los query, lo podremos extraer del req.query.
+        // En postman estos corresponden a los parametros.
+        const { page = 1, limit = 10 } = req.query;
+        const [error, paginationDto] = PaginationDto.create( +page, +limit)
+        if(error) return res.status(400).json({ message: error });
+
+        this.categoryService.getCategories( paginationDto! )
             .then( (categories) => res.json(categories) )
             .catch( (error) => handleError(error, res) );
     }

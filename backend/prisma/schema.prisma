@@ -39,7 +39,7 @@ model Category {
   available Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    Int      @unique
+  userId    Int      
   user      User     @relation(fields: [userId], references: [id])
   Product   Product[]
 } 

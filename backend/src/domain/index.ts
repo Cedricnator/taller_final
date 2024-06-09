@@ -14,3 +14,6 @@ export * from './dto/category/create-category.dto';
 export * from './dto/category/update-category.dto';
 export * from './datasource/category/categoryDatasource.datasource';
 export * from './repositories/category/category.repository';
+
+// Shared Files
+export * from './dto/shared/pagination.dto';
