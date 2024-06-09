@@ -45,6 +45,17 @@ export class UserDataSourceImpl implements UserDataSource {
       return true;
    }
    
+   async isUserFoundById(id: number): Promise<boolean> {
+      const user = await prisma.user.findFirst({
+         where: {
+            id
+         }
+      })
+      if (!user) return false;
+      return true;
+   }
+   
+   
    async validateUserEmail(user: UserEntity): Promise<UserEntity> {
       const userUpdated = await prisma.user.update({
          where: {

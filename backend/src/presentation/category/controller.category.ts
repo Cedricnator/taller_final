@@ -2,7 +2,6 @@
 
 import { Request, Response } from 'express';
 import { CreateCategoryDto } from '../../domain';
-import { handleError } from '../error';
 
 export class ControllerCategory {
     
@@ -27,7 +26,7 @@ export class ControllerCategory {
     public updateOne = async(req: Request, res: Response) => {
         res.json({message: 'updateOne'});
     }
-    
+
     public deleteOne = async(req: Request, res: Response) => {
         res.json({message: 'deleteOne'});
     }

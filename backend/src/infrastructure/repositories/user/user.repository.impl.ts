@@ -25,6 +25,10 @@ export class UserRepositoryImpl implements UserRepository {
       return await this.datasource.isUserFoundByEmail(email);
    }
 
+   async isUserFoundById(id: number): Promise<boolean> {
+      return await this.datasource.isUserFoundById(id);
+   }
+
    async validateUserEmail(user: UserEntity): Promise<UserEntity> {
       return await this.datasource.validateUserEmail(user);
    }

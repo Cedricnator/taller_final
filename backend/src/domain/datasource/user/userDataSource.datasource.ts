@@ -7,5 +7,6 @@ export abstract class UserDataSource {
    abstract findById(id: number):                         Promise<UserEntity>;
    abstract findByEmail(email: string):                   Promise<UserEntity>;
    abstract isUserFoundByEmail(email: string):            Promise<boolean>;
-   abstract validateUserEmail(user: UserEntity):             Promise<UserEntity>;
+   abstract isUserFoundById(id: number):                  Promise<boolean>;
+   abstract validateUserEmail(user: UserEntity):          Promise<UserEntity>;
 }
