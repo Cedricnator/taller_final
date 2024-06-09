@@ -1,6 +1,7 @@
+import { CreateCategoryDto } from '../../dto/category/create-category.dto';
 export abstract class CategoryRepository {
    
-   abstract createOneCategory():  Promise<any>;
+   abstract createOneCategory(createCategoryDto: CreateCategoryDto):  Promise<any>;
 
    abstract getAllCategories():   Promise<any>;
 

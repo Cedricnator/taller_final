@@ -1,20 +1,28 @@
-import { CategoryRepository } from "../../../domain";
+import { CategoryDatasource, CategoryRepository, CreateCategoryDto } from "../../../domain";
 
 export class CategoryRepositoryImpl implements CategoryRepository {
-   createOneCategory(): Promise<any> {
-      throw new Error("Method not implemented.");
+   constructor(
+      private readonly categoryDatasource: CategoryDatasource
+   ){}
+
+   async createOneCategory(createCategoryDto: CreateCategoryDto): Promise<any> {
+      return await this.categoryDatasource.createOneCategory(createCategoryDto);
    }
-   getAllCategories(): Promise<any> {
-      throw new Error("Method not implemented.");
+ 
+   async getAllCategories(): Promise<any> {
+      return await this.categoryDatasource.getAllCategories();
    }
-   getOneCategoryById(): Promise<any> {
-      throw new Error("Method not implemented.");
+ 
+   async getOneCategoryById(): Promise<any> {
+      return await this.categoryDatasource.getOneCategoryById();
    }
-   updateOneCategory(): Promise<any> {
-      throw new Error("Method not implemented.");
+ 
+   async updateOneCategory(): Promise<any> {
+      return await this.categoryDatasource.updateOneCategory();
    }
-   deleteOneCategory(): Promise<any> {
-      throw new Error("Method not implemented.");
+ 
+   async deleteOneCategory(): Promise<any> {
+      return await this.categoryDatasource.deleteOneCategory();
    }
 
 }
