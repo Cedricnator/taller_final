@@ -1,4 +1,4 @@
-import { RegisterUserDto, UserDataSource, UserEntity, UserRepository } from "../../../domain";
+import { RegisterUserDto, UserDataSource, UserEntity, UserRepository } from '../../../domain';
 
 export class UserRepositoryImpl implements UserRepository {
    constructor(

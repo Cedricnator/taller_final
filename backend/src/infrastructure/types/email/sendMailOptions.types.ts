@@ -1,4 +1,4 @@
-import { Attachement } from ".";
+import { Attachement } from '.';
 
 export interface SendMailOptions {
    to:            string | string[];

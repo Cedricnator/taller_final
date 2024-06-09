@@ -1,4 +1,4 @@
-import { UserEntity }      from "../../entities";
+import { UserEntity }      from '../../entities';
 import { RegisterUserDto } from '../../dto/auth/register-user.dto';
 
 export abstract class UserDataSource {

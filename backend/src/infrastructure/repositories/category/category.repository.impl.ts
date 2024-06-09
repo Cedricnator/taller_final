@@ -1,4 +1,4 @@
-import { CategoryDatasource, CategoryRepository, CreateCategoryDto } from "../../../domain";
+import { CategoryDatasource, CategoryRepository, CreateCategoryDto } from '../../../domain';
 
 export class CategoryRepositoryImpl implements CategoryRepository {
    constructor(

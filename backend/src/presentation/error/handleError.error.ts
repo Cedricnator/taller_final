@@ -1,5 +1,5 @@
 import { Response }    from 'express'
-import { CustomError } from "../../domain";
+import { CustomError } from '../../domain';
 
 export const handleError = ( error: unknown, res: Response ) => {
    if( error instanceof CustomError ){

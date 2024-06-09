@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import { JwtAdapter, envs } from "../../adapters";
+import { NextFunction, Request, Response } from 'express';
+import { JwtAdapter, envs } from '../../adapters';
 
 
 export class AuthMiddleware {

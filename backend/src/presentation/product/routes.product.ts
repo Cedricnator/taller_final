@@ -1,6 +1,6 @@
 //* Se encarga de manejar las rutas de la entidad
-import { Router }            from "express";
-import { ControllerProduct } from "./controller.product";
+import { Router }            from 'express';
+import { ControllerProduct } from './controller.product';
 
 export class RoutesProduct {
     static get routes(): Router {

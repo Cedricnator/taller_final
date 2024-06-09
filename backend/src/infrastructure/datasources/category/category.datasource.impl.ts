@@ -1,4 +1,4 @@
-import { CategoryDatasource, CreateCategoryDto } from "../../../domain";
+import { CategoryDatasource, CreateCategoryDto } from '../../../domain';
 
 export class CategoryDatasourceImpl implements CategoryDatasource {
    createOneCategory(createCategoryDto: CreateCategoryDto): Promise<any> {

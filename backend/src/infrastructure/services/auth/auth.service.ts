@@ -1,6 +1,6 @@
-import { CustomError, RegisterUserDto, UserEntity, LoginUserDto, UserRepository } from "../../../domain";
+import { CustomError, RegisterUserDto, UserEntity, LoginUserDto, UserRepository } from '../../../domain';
 import { BcryptAdapter, JwtAdapter } from '../../../adapters';
-import { EmailService }              from "./email.service";
+import { EmailService }              from './email.service';
 
 export class AuthService {
    constructor(
