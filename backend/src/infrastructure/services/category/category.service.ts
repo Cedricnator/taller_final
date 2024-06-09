@@ -37,16 +37,18 @@ export class CategoryService{
    }
 
    public getCategories = async()  => {
-      const categories = await this.prisma.category.findMany();
-      const categoriesArray = [];
+     
+     try {
+         const categories = await this.prisma.category.findMany();
+         
+         return categories.map( category => ({
+            id:        category.id,
+            name:      category.name,
+            available: category.available
+         }))
 
-      for (const CategoryEntit of categories) {
-         const { updatedAt, createdAt, ...categoryEntity } = CategoryEntity.fromObject(CategoryEntit);
-         categoriesArray.push(categoryEntity)
-      }
-
-      return {
-         categories: categoriesArray
+      } catch (error) {
+         CustomError.internalServer(`Error: ${error}`);
       }
    }
 
