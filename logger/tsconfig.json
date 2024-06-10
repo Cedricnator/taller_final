@@ -1,4 +1,14 @@
 {
+  // Se agregp exclude y include para eliminar el warning
+  "exclude": [
+    "nome_modules",
+    "dist",
+    "src/**/*.test.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/*/*.ts",
+  ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
