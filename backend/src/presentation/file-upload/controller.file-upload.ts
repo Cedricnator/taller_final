@@ -18,14 +18,20 @@ export class ControllerFileUpload {
 
     // Controladores
     public uploadFile =  (req: Request, res: Response) => {
-      const files =req.files;
       if( !req.files || Object.keys(req.files).length === 0 ){
         return res.status(400).json({ msg: 'No files were uploaded.' });
       }
-      
+      const validFolders = ['users','category', 'products'];
+      const folder = req.params.type as string;
+      if(!validFolders.includes(folder)){ 
+        res
+          .status(400)
+          .json({ msg: 'Invalid folder name, only is permited users, category and products as folders.' });
+      }
+
       const file = req.files.file as UploadedFile;
 
-      this.fileUploadService.uploadSingle(file)
+      this.fileUploadService.uploadSingle(file, `uploads/${folder}`)
         .then( uploaded  => res.json(uploaded))
         .catch( error => handleError(error, res));
     }
