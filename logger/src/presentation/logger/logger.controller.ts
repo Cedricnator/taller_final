@@ -5,7 +5,6 @@
 import { Request, Response } from 'express';
 import { LoggerService } from '../../infrastructure';
 import { handleError } from '../error';
-import { error } from 'console';
 import { SaveLogDto } from '../../domain';
 
 export class LoggerController {

@@ -1,5 +1,5 @@
 import { envs }              from './adapters';
-import { MongoDataBase } from './data';
+import { MongoDataBase }     from './data';
 import { AppRoutes, Server } from './presentation';
 
 // Funcion anonima autoinvocada, debe esperar a que se ejecute el main
