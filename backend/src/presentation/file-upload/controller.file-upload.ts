@@ -7,6 +7,7 @@ import { FileUploadService } from '../../infrastructure';
 import { handleError } from '../error';
 import { UploadedFile } from 'express-fileupload';
 import { error } from 'console';
+import { CustomError } from '../../domain';
 // import { handleError } from '../error';
 
 export class ControllerFileUpload {
@@ -18,9 +19,7 @@ export class ControllerFileUpload {
 
     // Controladores
     public uploadFile =  (req: Request, res: Response) => {
-      if( !req.files || Object.keys(req.files).length === 0 ){
-        return res.status(400).json({ msg: 'No files were uploaded.' });
-      }
+   
       const validFolders = ['users','category', 'products'];
       const folder = req.params.type as string;
       if(!validFolders.includes(folder)){ 
@@ -29,11 +28,12 @@ export class ControllerFileUpload {
           .json({ msg: 'Invalid folder name, only is permited users, category and products as folders.' });
       }
 
-      const file = req.files.file as UploadedFile;
+      const file = req.body.files.at(0) as UploadedFile;
 
       this.fileUploadService.uploadSingle(file, `uploads/${folder}`)
         .then( uploaded  => res.json(uploaded))
         .catch( error => handleError(error, res));
+    
     }
 
     public uploadMultipleFiles = (req: Request, res: Response) => {
