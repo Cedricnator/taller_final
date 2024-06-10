@@ -11,3 +11,7 @@ export * from './repositories/category/category.repository.impl';
 
 // Product Files
 export * from './services/products/product.service';
+
+
+// File Upload Files
+export * from './services/file-upload/file-upload.service';

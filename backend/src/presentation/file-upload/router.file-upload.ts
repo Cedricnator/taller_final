@@ -1,17 +1,16 @@
 //* Se encarga de manejar las rutas de la entidad
 import { Router }            from 'express';
 import { ControllerFileUpload } from './controller.file-upload';
+import { FileUploadService } from '../../infrastructure';
 
 export class RoutesFileUpload {
     static get routes(): Router {
-        const router         =  Router();
-        const controller     = new ControllerFileUpload();
+        const router            =  Router();
+        const fileUploadService = new FileUploadService();
+        const controller        = new ControllerFileUpload(fileUploadService);
 
-        router.get(   '/'    , controller.getAll     );
-        router.get(   '/:id' , controller.getOneById );
-        router.post(  '/create'    , controller.createOne  );
-        router.put(   '/:id' , controller.updateOne  );
-        router.delete('/:id' , controller.deleteOne  );
+        router.get( '/single/:type'    , controller.uploadFile          );
+        router.get( '/multiple/:type'  , controller.uploadMultipleFiles );
 
         return router;
     }
