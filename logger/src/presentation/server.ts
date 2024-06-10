@@ -1,6 +1,7 @@
 //*  Este archivo se encarga de crear el servidor, configurarlo y de iniciarlo.
 
 import express, { Router } from 'express';
+import { MorganAdapter } from '../adapters';
 
 // Contrato para la creación del servidor
 interface OptionsConstructor {
@@ -25,6 +26,7 @@ export class Server {
 
         //* Middlewares
         this.app.use(express.json());
+        this.app.use(MorganAdapter.morganMiddleware())
 
         //* Routes
         this.app.use(this.routes);
