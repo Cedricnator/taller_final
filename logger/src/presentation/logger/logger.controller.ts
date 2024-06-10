@@ -5,6 +5,8 @@
 import { Request, Response } from 'express';
 import { LoggerService } from '../../infrastructure';
 import { handleError } from '../error';
+import { error } from 'console';
+import { SaveLogDto } from '../../domain';
 
 export class LoggerController {
     
@@ -15,7 +17,9 @@ export class LoggerController {
 
     // Controladores
     public saveLog =  (req: Request, res: Response) => {
-      this.loggerService.saveLog()
+      const [ error, saveLogDto ] = SaveLogDto.create(req.body);
+      if(error) return res.status(400).json({message: error});
+      this.loggerService.saveLog(saveLogDto!)
                         .then((log) => res.json(log))
                         .catch((err) => handleError(err, res));
     }
