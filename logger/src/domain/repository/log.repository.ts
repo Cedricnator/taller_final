@@ -1,7 +1,9 @@
-import { LogEntity, LogSeverityLevel } from "../entity/log.entity";
+import { LogEntity, LogSeverityLevel } from '../entity/log.entity';
 
-// Permite llamar métodos que se encuentran en dataSource
+// Implementamos la regla de negocio de nuestro dominio
 export abstract class LogRepository {
    abstract saveLog(log: LogEntity): Promise<void>;
-   abstract getLogs(severityLevel: LogSeverityLevel): Promise<LogEntity[]>;
+   abstract getLogsByOrigin(origin: string): Promise<LogEntity[]>;
+   abstract getLogsBySeverityLevel(severityLevel: LogSeverityLevel): Promise<LogEntity[]>;
+   abstract getLogs(): Promise<LogEntity[]>;
 }

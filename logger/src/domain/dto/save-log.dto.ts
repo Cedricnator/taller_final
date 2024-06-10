@@ -21,7 +21,7 @@ export class SaveLogDto {
       if(!Object.values(LogSeverityLevel).includes(level)){
          return ['Invalid level'];
       }
-      if(origin){
+      if(!origin){
          return ['Missing origin'];
       }
 
