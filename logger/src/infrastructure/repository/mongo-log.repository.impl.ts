@@ -1,6 +1,6 @@
 import { LogRepository, LogDataSource, LogEntity, LogSeverityLevel } from '../../domain';
 
-export class LogRepositoryImpl implements LogRepository {
+export class MongoLogRepositoryImpl implements LogRepository {
    constructor(
       private readonly logDataSource: LogDataSource,
    ) { }
