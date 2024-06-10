@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { PaginationDto, CreateProductDto } from '../../domain';
 import { ProductService } from '../../infrastructure';
+import { handleError } from '../error';
 
 export class ControllerProduct {
     
@@ -17,11 +18,10 @@ export class ControllerProduct {
     public createOne =  (req: Request, res: Response) => {
         const [ error, createProductDto ] = CreateProductDto.create( req.body );
         if(error) return res.status(400).json({ message: error });
-        res.json({message: createProductDto });
-        // this.categoryService
-        //     .createOneCategory(createCategoryDto!, req.body.user )
-        //     .then( (category) => res.json(category) )
-        //     .catch( (error) => handleError(error, res) );
+        this.productService
+            .createOneCategory(createProductDto!)
+            .then( (product) => res.json(product) )
+            .catch( (error) => handleError(error, res) );
     }
 
     public getAll = (req: Request, res: Response) => {
@@ -31,9 +31,9 @@ export class ControllerProduct {
         const [error, paginationDto] = PaginationDto.create( +page, +limit)
         if(error) return res.status(400).json({ message: error });
 
-        // this.categoryService.getCategories( paginationDto! )
-        //     .then( (categories) => res.json(categories) )
-        //     .catch( (error) => handleError(error, res) );
+        this.productService.getProducts( paginationDto! )
+            .then( (products) => res.json(products) )
+            .catch( (error) => handleError(error, res) );
     }
 
     public getOneById = (req: Request, res: Response) => {

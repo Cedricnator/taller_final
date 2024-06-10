@@ -10,7 +10,7 @@ export class ProductService{
    constructor(){}
 
    public createOneCategory = async( createProductDto: CreateProductDto ) => {
-      try {
+      try {         
          const product = await this.prisma.product.create({
             data: {
                name: createProductDto.name,
@@ -28,6 +28,9 @@ export class ProductService{
                }
             }
          })
+
+         if(!product) CustomError.internalServer('Error creating product');
+
          return {
             id:          product.id,
             name:        product.name,
@@ -62,8 +65,8 @@ export class ProductService{
             page,
             limit,
             total,
-            next: `/api/v1/category?page=${ (page+1) }&limit=${ limit }`,
-            prev: (page-1 > 0) ? `/api/v1/category?page=${ (page-1) }&limit=${ limit }` : "",
+            next: `/api/v1/product?page=${ (page+1) }&limit=${ limit }`,
+            prev: (page-1 > 0) ? `/api/v1/product?page=${ (page-1) }&limit=${ limit }` : "",
             products: products.map( product => ({
                id:          product.id,
                name:        product.name,
