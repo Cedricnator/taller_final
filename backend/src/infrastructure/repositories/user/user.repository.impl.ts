@@ -1,4 +1,4 @@
-import { RegisterUserDto, UserDataSource, UserEntity, UserRepository } from "../../../domain";
+import { RegisterUserDto, UserDataSource, UserEntity, UserRepository } from '../../../domain';
 
 export class UserRepositoryImpl implements UserRepository {
    constructor(
@@ -23,6 +23,10 @@ export class UserRepositoryImpl implements UserRepository {
 
    async isUserFoundByEmail(email: string): Promise<boolean> {
       return await this.datasource.isUserFoundByEmail(email);
+   }
+
+   async isUserFoundById(id: number): Promise<boolean> {
+      return await this.datasource.isUserFoundById(id);
    }
 
    async validateUserEmail(user: UserEntity): Promise<UserEntity> {

@@ -8,9 +8,14 @@ export class LoginUserDto {
 
    static create( object: { [key: string]: any}): [string?, LoginUserDto?]{
       const { email, password } = object;
-
-      if( !regularExps.email.test(email)){
+      if( !email ){
          return ['Missing email'];
+      }
+      if( typeof email !== 'string' ){
+         return ['Email must be a string'];
+      }
+      if( !regularExps.email.test(email)){
+         return ['Invalid email format'];
       }
       if( !password ){
          return ['Missing password'];

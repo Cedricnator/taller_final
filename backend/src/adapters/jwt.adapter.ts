@@ -19,11 +19,11 @@ export class JwtAdapter {
       })           
    }
 
-   public async validateToken(token: string) {
+   public async validateToken<T>(token: string): Promise<T | null> {
       return new Promise((resolve) => {
          jwt.verify(token,`${this.JWT_SEED}`, (err, decoded) => {
             if (err) return resolve(null);
-            resolve(decoded);
+            resolve(decoded as T);
          })
       })
    }

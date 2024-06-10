@@ -1,9 +1,9 @@
-import { prisma } from "../../../data";
+import { prisma } from '../../../data';
 import { 
    RegisterUserDto, 
    UserDataSource, 
    UserEntity 
-} from "../../../domain";
+} from '../../../domain';
 
 export class UserDataSourceImpl implements UserDataSource {
    async saveUser(registerUserDto: RegisterUserDto): Promise<UserEntity> {
@@ -44,6 +44,17 @@ export class UserDataSourceImpl implements UserDataSource {
       if (!user) return false;
       return true;
    }
+   
+   async isUserFoundById(id: number): Promise<boolean> {
+      const user = await prisma.user.findFirst({
+         where: {
+            id
+         }
+      })
+      if (!user) return false;
+      return true;
+   }
+   
    
    async validateUserEmail(user: UserEntity): Promise<UserEntity> {
       const userUpdated = await prisma.user.update({

@@ -1,3 +1,10 @@
+/*
+    * Author: Cedric Kirmayr
+    * Last updated: 2021/07/25
+    * Project 
+
+*/
+
 import { envs } from './adapters/envs.adapter';
 import { AppRoutes, Server }from './presentation';
 
