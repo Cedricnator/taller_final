@@ -1,6 +1,7 @@
 //*  Este archivo se encarga de crear el servidor, configurarlo y de iniciarlo.
 
 import express, { Router } from 'express';
+import fileUpload from 'express-fileupload';
 
 // Contrato para la creación del servidor
 interface OptionsConstructor {
@@ -25,6 +26,9 @@ export class Server {
 
         //* Middlewares
         this.app.use(express.json());
+        this.app.use(fileUpload({
+            limits: { fileSize: 50 * 1024 * 1024 }
+        }))
 
         //* Routes
         this.app.use(this.routes);
