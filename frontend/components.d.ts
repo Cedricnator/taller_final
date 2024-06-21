@@ -24,6 +24,7 @@ declare module 'vue' {
     NavbarComponent: typeof import('./src/components/shared/NavbarComponent.vue')['default']
     ProductCard: typeof import('./src/components/products/ProductCard.vue')['default']
     ProductCarrousel: typeof import('./src/components/products/ProductCarrousel.vue')['default']
+    ProductGrid: typeof import('./src/components/products/grid/ProductGrid.vue')['default']
     ProductListCard: typeof import('./src/components/products/ProductListCard.vue')['default']
     ProductSelect: typeof import('./src/components/products/ProductSelect.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
