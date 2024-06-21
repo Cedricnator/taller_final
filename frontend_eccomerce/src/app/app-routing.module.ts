@@ -2,8 +2,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '/product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
-  { path: '/auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { 
+    path: '', 
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule) 
+  },
+  { 
+    path: 'auth', 
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) 
+  },
+  { 
+    path: 'product', 
+    loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
+  },
+  // { 
+  //   path: '**', 
+  //   redirectTo: '', 
+  //   pathMatch: 'full' 
+  // }
 ];
 
 @NgModule({
