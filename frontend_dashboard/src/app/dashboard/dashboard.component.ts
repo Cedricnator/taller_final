@@ -7,7 +7,6 @@ import { SidemenuComponent } from '../shared/components';
   standalone: true,
   imports: [RouterModule, SidemenuComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 
