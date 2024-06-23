@@ -17,11 +17,11 @@ export const routes: Routes = [
         title: 'Products',
         loadComponent: () => import('./dashboard/pages/products/products.component').then(c => c.ProductsComponent)
       },
-      {
-        path: 'product/:id',
-        title: 'Product',
-        loadComponent: () => import('./dashboard/pages/product/product.component').then(c => c.ProductComponent)
-      },
+      // {
+      //   path: 'product/:id',
+      //   title: 'Product',
+      //   loadComponent: () => import('./dashboard/pages/product/product.component').then(c => c.ProductComponent)
+      // },
       {
         path: 'user',
         title: 'User',
@@ -29,33 +29,33 @@ export const routes: Routes = [
       }
     ]
   },
-  // Public Routes
-  {
-    path: 'products',
-    loadComponent: () => import('./products/products.component').then(c => c.ProductsComponent),
-    children: [
-      {
-        path: 'home',
-        title: 'Home',
-        loadComponent: () => import('./products/pages/home/home.component').then(c => c.HomeComponent)
-      },
-      {
-        path: 'products',
-        title: 'Products',
-        loadComponent: () => import('./products/pages/products/products.component').then(c => c.ProductsComponent)
-      },
-      {
-        path: 'product',
-        title: 'Product',
-        loadComponent: () => import('./products/pages/product/product.component').then( c => c.ProductComponent)
-      },
-      {
-        path: 'about',
-        title: 'About',
-        loadComponent: () => import('./products/pages/about/about.component').then( c=> c.AboutComponent)
-      }
-    ]
-  },
+  // // Public Routes
+  // {
+  //   path: 'products',
+  //   loadComponent: () => import('./products/products.component').then(c => c.ProductsComponent),
+  //   children: [
+  //     {
+  //       path: 'home',
+  //       title: 'Home',
+  //       loadComponent: () => import('./products/pages/home/home.component').then(c => c.HomeComponent)
+  //     },
+  //     {
+  //       path: 'products',
+  //       title: 'Products',
+  //       loadComponent: () => import('./products/pages/products/products.component').then(c => c.ProductsComponent)
+  //     },
+  //     {
+  //       path: 'product',
+  //       title: 'Product',
+  //       loadComponent: () => import('./products/pages/product/product.component').then( c => c.ProductComponent)
+  //     },
+  //     {
+  //       path: 'about',
+  //       title: 'About',
+  //       loadComponent: () => import('./products/pages/about/about.component').then( c=> c.AboutComponent)
+  //     }
+  //   ]
+  // },
   {
     path: '',
     redirectTo: 'dashboard',
