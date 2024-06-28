@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,13 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
+  private authService = inject(AuthService);
+
+  public service = this.authService;
+
+  oNLogin(){
+    this.service.onLogin();
+  }
 
   public loginForm = this.formBuilder.group({
     email:    ['', [ Validators.required, Validators.email ]],
