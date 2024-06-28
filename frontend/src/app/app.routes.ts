@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
    {
-      path: '/',
+      path: 'dealership',
       title: 'Dealership',
       loadComponent: () => import('./dealership/dealership.component').then( c => c.DealershipComponent ),
       children:  [

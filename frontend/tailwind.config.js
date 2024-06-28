@@ -20,7 +20,7 @@ module.exports = {
             'Arial',
             'Noto Sans',
             'sans-serif',
-            'Apple Color Emoji',
+            'Apple Color Emoji', 
             'Segoe UI Emoji',
             'Segoe UI Symbol',
             'Noto Color Emoji'
@@ -46,6 +46,7 @@ module.exports = {
       },
     },
   },
+  darkMode: 'selector',
   plugins: [
     require('@tailwindcss/forms'),
     require('preline/plugin'),
