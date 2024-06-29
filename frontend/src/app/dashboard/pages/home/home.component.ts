@@ -4,7 +4,7 @@ import { CalendarComponent } from '../../components/calendar/calendar.component'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CalendarComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styles: ``
 })

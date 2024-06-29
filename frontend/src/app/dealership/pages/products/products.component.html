@@ -1,6 +1,6 @@
 <div
   class="hero h-[38rem]"
-  style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+  style="background-image: url('images/white.jpg');">
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="hero-content text-neutral-content text-center">
     <div class="max-w-md">
@@ -15,17 +15,12 @@
    <div>Cars</div>
 </div>
 
-
-<div class="grid grid-cols-2 mx-44 mt-24">
-   <div class="flex flex-col gap-4 mx-52">
-      <button class="btn btn-outline btn-warning">All categories</button>
-      <button class="btn btn-outline btn-warning">Coupe</button>
-      <button class="btn btn-outline btn-warning">Pick-Up</button>
-      <button class="btn btn-outline btn-warning">SUV</button>
-      <button class="btn btn-outline btn-warning">City-Car</button>
-   </div>
-   <div class="flex flex-wrap gap-2">
-      <app-card-list [objectList]="cars"/>
-   </div>
+<div class="flex gap-4 mx-44">
+   <button class="btn btn-outline btn-warning">All categories</button>
+   <button class="btn btn-outline btn-warning">Coupe</button>
+   <button class="btn btn-outline btn-warning">Pick-Up</button>
+   <button class="btn btn-outline btn-warning">SUV</button>
+   <button class="btn btn-outline btn-warning">City-Car</button>
 </div>
 
+<app-card-list [objectList]="cars"/>
