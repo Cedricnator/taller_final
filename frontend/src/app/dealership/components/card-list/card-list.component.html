@@ -1,0 +1,9 @@
+@for (item of objectList(); track $index) {
+   <app-card
+      imgSrc="item.imgSrc"
+      title="item.title"
+      description="item.description"
+   />
+} @empty {
+   <p>Cargando....</p>
+}
