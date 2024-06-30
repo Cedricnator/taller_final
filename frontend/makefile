@@ -24,7 +24,7 @@ recreate: down build up ps
 
 .PHONY: develop
 develop:
-	npm run dev
+	ng serve
 
 .PHONY: dev
 recreate: develop
