@@ -3,7 +3,7 @@ from sqlalchemy import Column
 from sqlalchemy.sql.sqltypes import Integer, String, Boolean
 from sqlalchemy.orm import declarative_base
 
-from config.db import engine
+from config.db_config import engine
 
 Base = declarative_base()
 

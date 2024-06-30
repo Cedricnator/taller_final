@@ -3,14 +3,14 @@ class TaskController():
    def __init__(self):
       pass
 
-   def get_tasks():
+   def get_tasks(self):
       pass
 
-   def get_task():
+   def get_task(self):
       pass
 
-   def create_task():
+   def create_task(self):
       pass
 
-   def update_task():
+   def update_task(self):
       pass

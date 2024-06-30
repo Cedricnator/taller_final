@@ -1,9 +1,8 @@
 from typing import Union
 from fastapi import APIRouter
-from models.task import Tasks
-# from models.db import DB_manager
-from config.db import session
-from dto.create_todo import CreateTaskDTO
+from models.task_model import Tasks
+from config.db_config import session
+from dto.create_todo_dto import CreateTaskDTO
 import logging
 
 task = APIRouter()
@@ -39,6 +38,11 @@ def get_task(id: int, q: Union[str, None] = None):
 
 @task.get("")
 def get_tasks():
+      """
+      get all tasks
+      params: None
+      return: List[Task] 
+      """
       try:
             return session.query(Tasks).all()
       except Exception as e:
