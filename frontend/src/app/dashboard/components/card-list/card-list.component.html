@@ -1,0 +1,16 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+   @for (item of cardInfo() ; track $index) {
+      <app-card 
+         [title]="item.title"
+         [content]="item.content"
+         [action]="item.action"
+      />
+   }@empty {
+      <div class="card bg-white w-96 shadow-xl">
+         <div class="card-body">
+            <h2 class="card-title">No data available</h2>
+            <p>There is no data available at the moment</p>
+         </div>
+      </div>
+   }
+</div>

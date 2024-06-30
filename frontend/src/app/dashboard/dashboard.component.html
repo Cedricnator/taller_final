@@ -1,9 +1,9 @@
-<div class="flex flex-col h-screen antialiased bg-gray-50 dark:bg-gray-900">
+<main class="flex flex-col h-screen antialiased bg-gray-50 dark:bg-gray-900">
    <app-navbar />
    <app-sidebar 
       [menuItems]="menuItems()"
    />
-   <main class="flex-grow p-4 md:ml-64 pt-20 overflow-auto">
+   <section class="flex-grow p-4 md:ml-64 pt-20 overflow-auto">
       <router-outlet />
-   </main>
-</div>
+   </section>
+</main>
