@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  frontend.local:
+    container_name: frontend.local
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    ports:
+      - 20200:8080
+    networks:
+      - p1_network
+
+networks:
+  p1_network:
+    external: true
