@@ -3,14 +3,14 @@ from sqlalchemy.engine import URL
 from sqlalchemy.orm import sessionmaker
 
 url = URL.create(
-   drivername="postgresql",
-   username="postgres",
-   password="postgres",
-   host="localhost",
-   database="postgres",
-   port=21101,
+    drivername="postgresql",
+    username="postgres",
+    password="postgres",
+    host="localhost",
+    database="postgres",
+    port=21101,
 )
 
-engine  = create_engine(url);
+engine = create_engine(url)
 Session = sessionmaker(bind=engine)
 session = Session()

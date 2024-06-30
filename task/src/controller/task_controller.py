@@ -1,16 +1,20 @@
+from service.task_service import TaskService
+from dto.create_todo_dto import CreateTaskDTO
+class TaskController:
+    def __init__(self, taskService: TaskService):
+        self.taskService = taskService
 
-class TaskController():
-   def __init__(self):
-      pass
+    def get_tasks(self):
+        return self.taskService.get_tasks()
 
-   def get_tasks(self):
-      pass
+    def get_task(self, id: int):
+        return self.taskService.get_task(id)
 
-   def get_task(self):
-      pass
+    def create_task(self, create_task_dto: CreateTaskDTO):
+        return self.taskService.create_task(create_task_dto)
+    
+    def delete_task(self, id: int):
+        return self.taskService.delete_task(id)
 
-   def create_task(self):
-      pass
-
-   def update_task(self):
-      pass
+    def update_task(self):
+        pass
