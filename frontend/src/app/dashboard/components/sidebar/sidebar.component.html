@@ -32,7 +32,14 @@
               routerLinkActive="bg-gray-100 dark:bg-gray-700"
               class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
-              <img src="svg/chart.svg" alt="chart" width="20" height="20">
+              <mat-icon
+                routerLinkActive="bg-white rounded-lg" 
+                aria-hidden="false" 
+                aria-label="Example home icon" 
+                color="primary" 
+                style="font-size: 22px; width: 22px; height: 22px;"
+                fontIcon="{{ item.icon }}" 
+              /> 
               <span class="ml-3">{{ item.title }}</span>
             </a>
           }
@@ -47,8 +54,14 @@
             href="#"
             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
           >
-            <img src="svg/docs.svg" alt="docs icon" width="20" height="20">
-           <span class="ml-3">Docs</span>
+            <mat-icon 
+              aria-hidden="false" 
+              aria-label="Example home icon" 
+              fontIcon="help_outline" 
+              color="primary" 
+              style="font-size: 22px; width: 22px; height: 22px;" 
+            />
+            <span class="ml-3">Docs</span>
           </a>
         </li>
       </ul>

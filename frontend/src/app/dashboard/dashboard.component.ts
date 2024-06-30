@@ -13,8 +13,8 @@ import type { MenuItems } from './interfaces';
 })
 export class DashboardComponent {
   public menuItems = signal<MenuItems[]>([
-    { title: 'Overview', link: 'home' }, 
-    { title: 'Products', link: 'products' },
-    { title: 'Task', link: 'task' }
+    { title: 'Overview', link: 'home', icon: "home" }, 
+    { title: 'Products', link: 'products', icon: "inventory" },
+    { title: 'Task', link: 'task', icon: "task" }
   ])
 }
