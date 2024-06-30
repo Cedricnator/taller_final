@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -11,5 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   styles: ``
 })
 export class DashboardComponent {
-  
+  public menuItems = signal([
+    { title: 'Overview', link: 'home' }, 
+    { title: 'Products', link: 'products' },
+    { title: 'Task', link: 'task' }
+  ])
 }
