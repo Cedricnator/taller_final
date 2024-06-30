@@ -5,12 +5,12 @@ from dto.create_todo_dto import CreateTaskDTO
 from models.task_model import Tasks
 
 class TaskService:
-    async def create_task(self, create_task_dto: CreateTaskDTO):
+    def create_task(self, create_task_dto: CreateTaskDTO):
         session.add(Tasks(title=create_task_dto.title, description=create_task_dto.description, done=create_task_dto.done))
         session.commit()
         return "todo_createddd"
 
-    async def get_task(self, id: int):
+    def get_task(self, id: int):
         try:
             task = session.query(Tasks).filter(Tasks.id == id).first()
             if task is None:
@@ -20,17 +20,17 @@ class TaskService:
             logging.error(str(e))
             return {"Se produjo un error al obtener una tarea, con el error": str(e)}
 
-    async def get_tasks(self):
+    def get_tasks(self):
         try:
             return session.query(Tasks).all()
         except Exception as e:
             logging.error(str(e))
             return {"error": str(e)}
 
-    async def update_task(self):
+    def update_task(self):
         pass
 
-    async def delete_task(self):
+    def delete_task(self, id: int):
       try:
         task = session.query(Tasks).filter(Tasks.id == id).first()
         if task is None:

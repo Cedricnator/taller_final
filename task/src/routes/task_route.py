@@ -1,7 +1,5 @@
 from typing import Union
-from fastapi import APIRouter, HTTPException
-from models.task_model import Tasks
-from config.db_config import session
+from fastapi import APIRouter
 from dto.create_todo_dto import CreateTaskDTO
 from controller.task_controller import TaskController
 from service.task_service import TaskService
