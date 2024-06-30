@@ -1,11 +1,6 @@
 import { Component, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-interface MenuItems {
-  title: string;
-  link: string;
-  icon?: string;
-}
+import type { MenuItems } from '@dashboard/interfaces';
 
 @Component({
   selector: 'app-sidebar',
