@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Renderer2, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -8,6 +8,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './hero.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeroComponent {
+export class HeroComponent implements OnInit{
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      // Encuentra el elemento por su clase, id, etc. Asegúrate de que el elemento exista en tu plantilla HTML.
+      const heroElement = this.el.nativeElement.querySelector('#hero');
+      this.renderer.setStyle(heroElement, 'backgroundImage', "url('images/4056.jpg')");
+    }, 10000);
+  }
 
 }

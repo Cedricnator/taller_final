@@ -1,14 +1,17 @@
-<div class="card bg-base-100 image-full w-96 shadow-xl">
+<div class="card bg-white image-full w-96 shadow-xl">
    <figure>
      <img
        [srcset]="imgSrc()"
+       width="229"
+       height="200"
        alt="Shoes" />
    </figure>
    <div class="card-body">
-     <h2 class="card-title">{{ title() }}</h2>
+     <h2 class="card-title text-blue-800">{{ title() }}</h2>
      <p>{{ description() }}</p>
+     <p class="text-orange-400">{{ price() }}</p>
      <div class="card-actions justify-end">
-       <button class="btn btn-primary">Buy Now</button>
+       <button class="btn btn-primary rounded-full text-white">Buy Now</button>
      </div>
    </div>
- </div>
+ </div> 
