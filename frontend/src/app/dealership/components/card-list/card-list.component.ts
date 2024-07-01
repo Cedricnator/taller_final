@@ -1,6 +1,13 @@
 import { Component, input } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 
+interface modelCar {
+  imgSrc: string;
+  title: string;
+  description: string;
+  price: number
+}
+
 @Component({
   selector: 'app-card-list',
   standalone: true,
@@ -9,5 +16,5 @@ import { CardComponent } from '../card/card.component';
   styleUrl: './card-list.component.css'
 })
 export class CardListComponent {
-  objectList = input.required<object[]>();
+  objectList = input.required<modelCar[]>();
 }

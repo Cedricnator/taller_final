@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@dashboard/*": ["./src/app/dashboard/*"],
+      "@auth/*": ["./src/app/auth/*"],
+      "@dealership/*": ["./src/app/dealership/*"],
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
