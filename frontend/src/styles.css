@@ -12,6 +12,18 @@
    }
 }
 
+@layer utilities{
+  .nav::after{
+    @apply content-[''] bg-blue-600 h-[3px] w-[0%] left-0 -bottom-[5px] rounded-xl absolute duration-300
+  
+  }
+
+  .nav:hover::after{
+    @apply w-[100%]
+  }
+
+}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Source Sans 3', "Helvetica Neue", sans-serif; }

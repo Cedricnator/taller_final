@@ -10,5 +10,5 @@ import { Component, input } from '@angular/core';
 export class CardComponent {
   title = input.required<string>();
   content = input.required<string>();
-  action = input<string>()
+  action = input<string>();
 }
