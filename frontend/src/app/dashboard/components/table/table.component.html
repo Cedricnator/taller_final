@@ -1,6 +1,16 @@
 <div class="mat-elevation-z8">
+   <div class="flex justify-between items-center p-5 bg-white">
+      <div class="flex gap-2">
+         <span class="text-gray-500">All products:</span> 
+         <span class="font-semibold">12312132</span>
+      </div>
+      <button mat-raised-button style="border-radius: 12%; height: 2rem; "> 
+         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+         <span class="text-black font-semibold">Export</span> 
+      </button>
+   </div>
    <table mat-table [dataSource]="dataSource">
- 
+      
      <!-- Position Column -->
      <ng-container matColumnDef="position">
        <th mat-header-cell *matHeaderCellDef> No. </th>
