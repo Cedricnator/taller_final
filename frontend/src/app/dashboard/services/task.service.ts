@@ -1,4 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject, signal } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
 
 interface Task{
   id: number;
@@ -15,6 +17,8 @@ interface TaskState {
   providedIn: 'root'
 })
 export class TaskService {
+  private http = inject( HttpClient )
+  private baseUrl = "http://localhost:8000/api"
 
   #taskState = signal<TaskState>({
     task: []
@@ -29,19 +33,31 @@ export class TaskService {
   }
 
   public getTasks(){
-    return "Obteniendo todas las tareas..."
+    return this.http.get<any>(`${this.baseUrl}/task`)
+      .pipe(
+        map( resp => resp ),
+        tap( console.log)
+      )
   }
 
-  public createTask(title: string, description: string, isDone: boolean){
-    console.table({ title, description, isDone })
-    return "Creando tarea..."
+  public createTask(title: string, description: string, done: boolean){
+    console.table({ title, description, done })
+    return this.http.post<any>(`${this.baseUrl}/task/`, { title, description, done })
+      .pipe(
+        map( resp => resp ),
+        tap( console.log)
+      )
   }
 
   public deleteTask(id: number){
-    return "Eliminando tarea..."
+    return this.http.delete(`${this.baseUrl}/task/${id}`)
+      .pipe(
+        map( resp => resp ),
+        tap( console.log )
+      )
   }
 
-  public updateTask(title: string, description: string, isDone: boolean){
+  public updateTask(id: number, title: string, description: string, isDone: boolean){
     return "Actualizando tarea..."
   }
 

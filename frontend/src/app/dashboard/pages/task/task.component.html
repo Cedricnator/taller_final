@@ -1,26 +1,53 @@
-
-<div class="ml-24 flex gap-24">
-   <h1>Tasks</h1>
-   <button>
-      Add new task
-   </button>
-</div>
-
-<div class="ml-24 mt-8">
-   <div>
-      <h3 class="text-gray-400 mb-4">
-         My tasks
-      </h3>
-      <!-- Agregar un grid, de forma que esten agrupadas las tareas en 3 columnas -->
+<div>
+   <div class="ml-24 flex gap-24 items-center">
+      <h1 class="text-2xl font-bold">Tasks</h1>
+      <button mat-raised-button (click)="openDialog()" color="primary"   >
+         Add new task
+         <mat-icon aria-label="Example home icon" fontIcon="add" />
+      </button>
+   </div>
+   
+   <div class="ml-24 mt-12">
       <div>
-         <div>Tittle Task</div>
-         <textarea>Content</textarea>
-         <div>
-            is done: false
+         <div class="flex w-full gap-4 items-center mb-4">
+            <h3 class="text-gray-400 w-[5%]">
+               My tasks
+            </h3>
+            <div class="h-[0.1rem] w-full bg-gray-400 mr-4"></div>
          </div>
-         <div>
-            <button>Complete</button>
-            <button>Delete</button>
+         <!-- Agregar un grid, de forma que esten agrupadas las tareas en 3 columnas -->
+         <div class="grid grid-cols-3 gap-4 mr-4">
+            @for (item of taskes(); track $index) {
+               <mat-card class="example-card" appearance="outlined">
+                  <mat-card-header>
+                    <div mat-card-avatar class="example-header-image">
+                        <mat-icon aria-label="Example home icon" fontIcon="queue" color="primary" />
+                    </div>
+                    <mat-card-title>{{ item.title }}</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                        {{ item.description }}
+                    </p>
+                     @if (!item.done) {
+                        <span>Is not done</span>
+                     } @else {
+                        <span>Is done</span>
+                     }
+                  </mat-card-content>
+                  <mat-card-actions class="flex justify-between">
+                    <button 
+                        (click)="deleteTask(item.id)"
+                        mat-stroked-button 
+                        style="background-color: orange; color: white;">
+                        DELETE TASK
+                     </button>
+                    <button mat-flat-button >COMPLETE/UNCOMPLETE</button>
+                  </mat-card-actions>
+                </mat-card>
+            } @empty {
+               <div>No hay tareas...</div>
+            }
          </div>
       </div>
    </div>
