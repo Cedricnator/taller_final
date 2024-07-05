@@ -7,11 +7,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ProductService } from '@dashboard/services/product-service.service';
 import { AddModelFormComponent } from '../add-model-form/add-model-form.component';
 import { ExcelService } from '@dashboard/services/excel-service.service';
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatIconModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatIconModule, DragDropModule, CdkDropList, CdkDrag],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -20,7 +21,7 @@ export class TableComponent {
   private readonly _excelService = inject(ExcelService);
   private readonly _dialog = inject(MatDialog);
 
-  public productData = signal<Product[]>([]);
+  public productData: Product[] = [];
 
   constructor(){
     this._productService.getProducts().subscribe( products => {
@@ -37,7 +38,7 @@ export class TableComponent {
   }
 
   exportExcelFile(): void {
-    this._excelService.generateExcel(this.productData()).subscribe(
+    this._excelService.generateExcel(this.productData).subscribe(
       { 
         next: (data) => { console.log(data) },
         error: (error) => { console.log(error) },
@@ -46,14 +47,15 @@ export class TableComponent {
     )
   }
 
-  displayedColumns: string[] = [
-    'position', 
-    'name', 
-    'weight', 
-    'symbol'
-  ];
+  drop(event: CdkDragDrop<Product[]>) {
+    const previousIndex = this.productData.findIndex(d => d === event.item.data);
 
-  columns: string[] = [
+    moveItemInArray(this.productData, previousIndex, event.currentIndex);
+   
+  }
+
+
+  displayedColumns: string[] = [
     'position',
     'name',
     'img',
@@ -62,7 +64,7 @@ export class TableComponent {
     'stock',
   ]
 
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Product>(this.productData);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
