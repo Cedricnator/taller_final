@@ -3,11 +3,9 @@ from typing import List
 from pydantic import BaseModel
 
 class Product(BaseModel):
-   product: str
-   category: str
-   stock: int
+   name: str
+   description: str
    price: int
-   last_update: str
-
+   stock: int
 class CreateExcelDto(BaseModel):
    products: List[Product]

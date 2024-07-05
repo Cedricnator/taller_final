@@ -3,7 +3,7 @@
     <div class="flex lg:flex-1">
       <a href="#" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
+        <div class="text-white">Teslo Shop</div>
       </a>
     </div>
     <div class="flex lg:hidden">
@@ -16,10 +16,10 @@
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
       @for (item of MenuItem(); track $index) {
-        <a 
+        <a
           routerLinkActive="active-link"
-          [routerLink]="item.link" 
-          class="text-sm font-semibold leading-6 text-white dark:text-white"> 
+          [routerLink]="item.link"
+          class="text-sm font-semibold leading-6 text-white dark:text-white">
           <span class="link link-underline link-underline-black text-black">
             {{ item.title }}
           </span>
@@ -27,8 +27,8 @@
       }
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a 
-        [routerLink]="['/auth/login']" 
+      <a
+        [routerLink]="['/auth/login']"
         class="text-sm font-semibold leading-6 text-white dark:text-white">
         Log in <span aria-hidden="true">&rarr;</span>
       </a>

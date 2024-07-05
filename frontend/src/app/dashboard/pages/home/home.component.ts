@@ -13,10 +13,10 @@ import { InfoPanelComponent } from '@dashboard/components/info-panel/info-panel.
 export class HomeComponent {
 
   public cardInfo = signal([
-    { title: "Card 1", content: "Content 1", action: "Action 1"},
-    { title: "Card 2", content: "Content 2", action: "Action 2"},
-    { title: "Card 3", content: "Content 3", action: "Action 3"},
-    { title: "Card 4", content: "Content 4", action: "Action 4"},
+    { title: "Sales", content: "$45.000.000", action: "View Sales"},
+    { title: "Models", content: "10 models", action: "View all models"},
+    { title: "Task for done", content: "0", action: "Add more task"},
+    { title: "Docs", content: "You do need help?", action: "Go to the document section"},
   ]);
 
 }

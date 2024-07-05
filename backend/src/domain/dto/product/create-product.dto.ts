@@ -5,12 +5,13 @@ export class CreateProductDto {
       public readonly name:        string,
       public readonly description: string,
       public readonly price:       number,
+      public readonly stock:       number,
       public readonly userId:      number,
       public readonly categoryId:  number,
    ){}
 
    static create( object: { [key: string]: any}): [string?, CreateProductDto?]{
-      const { name, description, price, userId, categoryId } = object;
+      const { name, description, price, stock, userId, categoryId } = object;
 
       if( !name){
          return ['Missing name'];
@@ -44,6 +45,6 @@ export class CreateProductDto {
       }
 
       // Retorna si hay error, sino es undefiend, y el objeto CreateProductDto, que si es correcto, lo devuelve.
-      return [undefined, new CreateProductDto(name, description, price, userId, categoryId)];
+      return [undefined, new CreateProductDto(name, description, price, stock, userId, categoryId)];
    }
 }

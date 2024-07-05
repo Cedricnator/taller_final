@@ -17,6 +17,16 @@ export const routes: Routes = [
             loadComponent: () => import('./dealership/pages/products/products.component').then( c => c.ProductsComponent)
          },
          {
+            path: 'about',
+            title: 'About',
+            loadComponent: () => import('./dealership/pages/about/about.component').then( c => c.AboutComponent)
+         },
+         {
+            path: 'contact',
+            title: 'Contact',
+            loadComponent: () => import('./dealership/pages/contact/contact.component').then( c => c.ContactComponent )
+         },
+         {
             path: '',
             redirectTo: 'land',
             pathMatch: 'full',
@@ -64,6 +74,11 @@ export const routes: Routes = [
             path: 'task',
             title: 'Task',
             loadComponent: () => import('./dashboard/pages/task/task.component').then( c => c.TaskComponent )
+         },
+         {
+            path: 'docs',
+            title: 'Docs',
+            loadComponent: () => import('./dashboard/pages/docs/docs.component').then( c => c.DocsComponent )
          },
          {
             path: '',

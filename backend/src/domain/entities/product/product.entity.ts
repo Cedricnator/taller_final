@@ -3,15 +3,16 @@ import { CustomError } from "../../errors/custom.error";
 export class ProductEntity{
 
    constructor(
-      public readonly id:        number,
-      public readonly name:      string,
+      public readonly id:          number,
+      public readonly name:        string,
       public readonly description: string,
-      public readonly price: number,
-      public readonly createdAt: Date,
-      public readonly updatedAt: Date,
-      public readonly userId: number,
-      public readonly categoryId: number,
-      public readonly img?: string,
+      public readonly price:       number,
+      public readonly createdAt:   Date,
+      public readonly updatedAt:   Date,
+      public readonly userId:      number,
+      public readonly categoryId:  number,
+      public readonly stock?:      number,
+      public readonly img?:        string,
    ){
       this.id          = id;
       this.name        = name;
@@ -21,6 +22,7 @@ export class ProductEntity{
       this.updatedAt   = updatedAt;
       this.userId      = userId;
       this.categoryId  = categoryId;
+      this.stock       = stock;
       this.img         = img;
    }
 
