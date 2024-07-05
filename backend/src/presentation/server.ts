@@ -2,6 +2,7 @@
 
 import express, { Router } from 'express';
 import fileUpload from 'express-fileupload';
+import cors from 'cors'
 
 // Contrato para la creación del servidor
 interface OptionsConstructor {
@@ -31,11 +32,10 @@ export class Server {
         }))
 
         //* CORS
-        this.app.use((req, res, next) => {
-            res.append('Access-Control-Allow-Origin', ['*']);
-            res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-            next()
-        })
+        const corsOptions = {
+            origin: 'http://localhost:4200',
+        };          
+        this.app.use(cors(corsOptions))
 
         //* Routes
         this.app.use(this.routes);

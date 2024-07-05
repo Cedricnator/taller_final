@@ -1,4 +1,4 @@
-from openpyxl import Workbook # type: ignore
+from openpyxl import Workbook
 from io import BytesIO
 from dto.create_excel_dto import CreateExcelDto
 

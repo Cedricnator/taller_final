@@ -16,11 +16,12 @@ export interface Product {
 })
 export class ExcelService {
   private http = inject(HttpClient)
-  private baseUrl = 'http://localhost:8000/document';
+  private baseUrl = 'http://localhost:8080/document';
 
   public generateExcel(products: Product[]){
-    return this.http.post(`${this.baseUrl}/generate-excel`, 
-      products, 
+    console.log('sendig products: ', products)
+    return this.http.post(`${this.baseUrl}/`,
+      products,
       { responseType: 'blob' });
   }
 

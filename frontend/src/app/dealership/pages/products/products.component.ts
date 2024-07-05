@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CardListComponent } from '../../components/card-list/card-list.component';
+import { DealerShipService } from '@dealership/services/dealership.service';
 
 interface Car {
   imgSrc: string;
@@ -15,7 +16,22 @@ interface Car {
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit{
+
+  public car = []
+
+  ngOnInit(): void {
+    this.getProducts()
+  }
+
+  private dealerShipService = inject(DealerShipService)
+
+  getProducts(){
+    this.dealerShipService.getProducts().subscribe({
+      next: (products) => this.car = products.product
+    })
+  }
+
   carss = signal<Car[]>([
     { imgSrc: "images/image_principal.png", title:"Toyota Raize", description:"Desde 12.429.000", price: 2000, },
     { imgSrc: "images/toyota-cars/toyota-pick-up-1.png", title:"Toyota Hilux", description:"Desde 19.429.000", price: 2000,},

@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableComponent } from '@dashboard/components';
-import { ExcelService, Product } from '@dashboard/services/excel-service.service';  
+import { ExcelService, Product } from '@dashboard/services/excel-service.service';
 import { ProductService } from '@dashboard/services/product-service.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { ProductService } from '@dashboard/services/product-service.service';
   templateUrl: './products.component.html',
   styles: ``
 })
-export class ProductsComponent {
+export class ProductsComponent{
   private _excelService = inject(ExcelService);
-  private _productService = inject(ProductService)
+  public _productService = inject(ProductService)
+  public router = inject(Router);
 
   public products = signal<Product[]>([])
 

@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { Injectable, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _apiURL = environment.API_URL;
-  private _isAuthenticated = false;
-  private httpClient = inject(HttpClient);
+  private _apiURL = 'localhost:3000/api/v1/auth/login';
+  public isAuthenticated = signal(false);
+  private http = inject(HttpClient);
 
   public login( email: string, password: string){
-    
-    console.log("loggeando desde el servicio")
+    console.log({ email, password})
+    const expEmail="cedric@google.com"
+    const expPassword="123456789"
+    if(email == expEmail && password == expPassword){
+      this.isAuthenticated.set(true)
+      return true;
+    }
+    return false;
   }
 
   public register( email: string, password: string, name: string){

@@ -18,7 +18,7 @@ export interface Product{
 })
 export class ProductService {
   private http = inject(HttpClient)
-  private baseUrl = 'http://localhost:8082/api/v1';
+  private baseUrl = 'http://localhost:3000/api/v1';
 
   public getProducts(){
     return this.http.get<Product[]>(`${this.baseUrl}/product/`).pipe(
@@ -29,7 +29,8 @@ export class ProductService {
 
   public createProduct(productProperties: Product): Observable<any>{
     const { name, description, price, stock, userId, categoryId } = productProperties;
-    return this.http.post<any>(`${this.baseUrl}/product/create`, 
+    console.log(productProperties)
+    return this.http.post<any>(`${this.baseUrl}/product/create`,
       { name, description, price, stock, userId, categoryId })
         .pipe(
           map(resp => resp),
