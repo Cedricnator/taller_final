@@ -29,14 +29,14 @@ export class TableComponent {
     })
   }
 
-  openDialogAddModel() {
+  openDialogAddModel(): void {
     const dialogRef = this._dialog.open(AddModelFormComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
-  exportExcelFile(){
+  exportExcelFile(): void {
     this._excelService.generateExcel(this.productData()).subscribe(
       { 
         next: (data) => { console.log(data) },
@@ -45,7 +45,7 @@ export class TableComponent {
       }
     )
   }
-  
+
   displayedColumns: string[] = [
     'position', 
     'name', 
