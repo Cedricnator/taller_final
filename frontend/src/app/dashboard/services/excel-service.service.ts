@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-export interface Product{
-  product:      string;
-  category:     string;
-  stock:        number;
-  price:        number;
-  last_updated: string;
+export interface Product {
+  id: number;
+  name: string;
+  img?: string;
+  description: string;
+  price: number;
+  stock: number;
+  category: string;
 }
 
 @Injectable({

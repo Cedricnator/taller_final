@@ -4,10 +4,16 @@
          <span class="text-gray-500">All products:</span> 
          <span class="font-semibold">12312132</span>
       </div>
-      <button mat-raised-button style="border-radius: 12%; height: 2rem; "> 
-         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
-         <span class="text-black font-semibold">Export</span> 
-      </button>
+      <div class="flex gap-4">
+        <button mat-raised-button style="border-radius: 12%; height: 2rem; " (click)="openDialogAddModel()"> 
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+          <span class="text-black font-semibold">Add new model</span> 
+       </button>
+        <button mat-raised-button style="border-radius: 12%; height: 2rem; "> 
+           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_upward"></mat-icon>
+           <span class="text-black font-semibold">Export</span> 
+        </button>
+      </div>
    </div>
    <table mat-table [dataSource]="dataSource">
       

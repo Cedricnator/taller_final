@@ -1,8 +1,12 @@
-import { Component, ViewChild, input } from '@angular/core';
+import { Component, ViewChild, input, signal, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { ProductService } from '@dashboard/services/product-service.service';
+import { AddModelFormComponent } from '../add-model-form/add-model-form.component';
+import { ExcelService } from '@dashboard/services/excel-service.service';
 
 @Component({
   selector: 'app-table',
@@ -12,8 +16,52 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrl: './table.component.css'
 })
 export class TableComponent {
-  productData = input();
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  private readonly _productService = inject(ProductService);
+  private readonly _excelService = inject(ExcelService);
+  private readonly _dialog = inject(MatDialog);
+
+  public productData = signal<Product[]>([]);
+
+  constructor(){
+    this._productService.getProducts().subscribe( products => {
+      this.productData = products.products;
+      console.log(products.products);
+    })
+  }
+
+  openDialogAddModel() {
+    const dialogRef = this._dialog.open(AddModelFormComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  exportExcelFile(){
+    this._excelService.generateExcel(this.productData()).subscribe(
+      { 
+        next: (data) => { console.log(data) },
+        error: (error) => { console.log(error) },
+        complete: () => { console.log('Request completed')}
+      }
+    )
+  }
+  
+  displayedColumns: string[] = [
+    'position', 
+    'name', 
+    'weight', 
+    'symbol'
+  ];
+
+  columns: string[] = [
+    'position',
+    'name',
+    'img',
+    'description',
+    'price',
+    'stock',
+  ]
+
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -21,6 +69,17 @@ export class TableComponent {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+}
+
+
+export interface Product {
+  id: number;
+  name: string;
+  img?: string;
+  description: string;
+  price: number;
+  stock: number;
+  category: string;
 }
 
 export interface PeriodicElement {

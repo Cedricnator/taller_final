@@ -18,7 +18,7 @@ interface TaskState {
 })
 export class TaskService {
   private http = inject( HttpClient )
-  private baseUrl = "http://localhost:8000/api"
+  private baseUrl = "http://localhost:8081/api"
 
   #taskState = signal<TaskState>({
     task: []

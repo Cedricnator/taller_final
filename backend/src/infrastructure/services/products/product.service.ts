@@ -9,13 +9,14 @@ export class ProductService{
 
    constructor(){}
 
-   public createOneCategory = async( createProductDto: CreateProductDto ) => {
+   public createOneProduct = async( createProductDto: CreateProductDto ) => {
       try {         
          const product = await this.prisma.product.create({
             data: {
                name: createProductDto.name,
                description: createProductDto.description,
                price: createProductDto.price,
+               stock: createProductDto.stock,
                category: {
                   connect: {
                      id: createProductDto.categoryId
@@ -35,6 +36,7 @@ export class ProductService{
             id:          product.id,
             name:        product.name,
             description: product.description,
+            stock:       product.stock,
             byUserId: {
                id: product.userId
             },
@@ -72,6 +74,7 @@ export class ProductService{
                name:        product.name,
                description: product.description,
                price:       product.price,
+               stock:       product.stock,
                img:         product.img,
             }))
          }
