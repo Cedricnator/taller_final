@@ -1,0 +1,88 @@
+<h2 mat-dialog-title>Add new task</h2>
+<mat-dialog-content class="mat-typography">
+   <form action="" id="add" class="flex flex-col" [formGroup]="addModelForm">
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            Name
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Ex. Pizza" 
+            value="" 
+            formControlName="name"
+            required="true"
+         >
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            Description
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Ex. Pizza" 
+            value="" 
+            formControlName="description"
+            required="true"
+            type="text"
+         >
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            Price
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Enter the price of the new model" 
+            formControlName="price"
+            required="true"
+            type="number"
+         />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            Stock
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Enter the stock of the new model" 
+            formControlName="stock"
+            type="number"
+         />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            User Id
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Enter the stock of the new model" 
+            formControlName="stock"
+            type="userId"
+         />
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+         <mat-label>
+            User Id
+         </mat-label>
+         <input 
+            matInput 
+            placeholder="Enter the stock of the new model" 
+            formControlName="stock"
+            type="categoryId"
+         />
+      </mat-form-field>
+   </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+   <button mat-button mat-dialog-close >
+      Cancel
+   </button>
+   <button mat-button [mat-dialog-close]="true" cdkFocusInitial form="add" (click)="addModel()">
+      Add
+   </button>
+</mat-dialog-actions>

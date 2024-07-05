@@ -19,7 +19,7 @@ export class ControllerProduct {
         const [ error, createProductDto ] = CreateProductDto.create( req.body );
         if(error) return res.status(400).json({ message: error });
         this.productService
-            .createOneCategory(createProductDto!)
+            .createOneProduct(createProductDto!)
             .then( (product) => res.json(product) )
             .catch( (error) => handleError(error, res) );
     }

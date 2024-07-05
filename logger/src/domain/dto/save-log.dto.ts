@@ -1,4 +1,4 @@
-import { LogSeverityLevel } from "../entity/log.entity";
+import { LogSeverityLevel } from "../entity/log.enum";
 
 export class SaveLogDto {
    constructor(
